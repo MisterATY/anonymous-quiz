@@ -1,5 +1,5 @@
 // pages/results.js
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const Results = ({ submissions }) => {
@@ -36,8 +36,8 @@ const Results = ({ submissions }) => {
       <h1>Quiz Results</h1>
       {submissions.map((submission, index) => (
         <div key={index}>
-          <h2>Question {index + 1}</h2>
-          <p>{submission.answers}</p>
+          <h2>Submission {index + 1}</h2>
+          <pre>{JSON.stringify(submission, null, 2)}</pre>
         </div>
       ))}
       <button onClick={downloadSubmissions}>Download Submissions</button>
@@ -45,15 +45,35 @@ const Results = ({ submissions }) => {
   );
 };
 
-export async function getServerSideProps() {
-  const res = await fetch('/api/results');
-  const data = await res.json();
+export async function getServerSideProps(context) {
+  const { admin } = context.query;
 
-  return {
-    props: {
-      submissions: data.submissions,
-    },
-  };
+  if (admin !== '1') {
+    return {
+      notFound: true,
+    };
+  }
+
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/results`);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch results: ${res.status}`);
+    }
+    const data = await res.json();
+
+    return {
+      props: {
+        submissions: data.submissions,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching results:', error);
+    return {
+      props: {
+        submissions: [],
+      },
+    };
+  }
 }
 
 export default Results;
