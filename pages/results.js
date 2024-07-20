@@ -1,6 +1,7 @@
 // pages/results.js
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import questions from '../data/questions';  // Import the questions
 
 const Results = ({ submissions }) => {
   const [results, setResults] = useState({});
