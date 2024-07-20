@@ -1,21 +1,11 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import questions from '../data/questions';  // Import the questions
+// pages/results.js
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-const Results = () => {
+const Results = ({ submissions }) => {
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(true);
 
-  // Redirect to 404 if admin query param is not 1
-  // useEffect(() => {
-  //   if (admin !== '1') {
-  //     router.replace('/404');
-  //   }
-  // }, [admin]);
-
-  // if (admin !== '1') {
-  //   return null;
-  // }
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -83,6 +73,27 @@ export async function getServerSideProps(context) {
   if (admin !== '1') {
     return {
       notFound: true,
+    };
+  }
+
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/results`);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch results: ${res.status}`);
+    }
+    const data = await res.json();
+
+    return {
+      props: {
+        submissions: data.submissions,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching results:', error);
+    return {
+      props: {
+        submissions: [],
+      },
     };
   }
 }
