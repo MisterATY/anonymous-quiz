@@ -13,11 +13,11 @@ const Quiz = ({ questions }) => {
     const checkIfAlreadyAnswered = async () => {
       try {
         const response = await axios.get("/api/check");
-        if (response.status === 200) {
+        if (response.data.ok) {
+          setQuizStarted(true);
+        } else {
           setMessage("Siz avval ishtirok etgansiz");
           setQuizStarted(false);
-        } else {
-          setQuizStarted(true);
         }
       } catch (error) {
         setQuizStarted(true);

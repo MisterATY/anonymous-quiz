@@ -1,12 +1,8 @@
-import { promises as fs } from 'fs';
-import path from 'path';
 import { sql } from '@vercel/postgres';
 
 const getClientIp = (req) => {
   return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 };
-
-const submissionsFile = path.join('/tmp', 'submissions.json');
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -28,7 +24,7 @@ export default async function handler(req, res) {
   }
 
   // Check if IP has already submitted
-  if (submissions.some(submission => submission.ip === ip)) {
+  if (submissions.some(submission => submission.ip === ip && ip !== '::1')) {
     return res.status(400).json({ message: 'You have already answered the quiz.' });
   }
 

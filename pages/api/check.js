@@ -13,14 +13,14 @@ export default async function handler(req, res) {
     const alreadySubmitted = submissions.some(submission => submission.ip === ip);
 
   if (alreadySubmitted) {
-    res.status(200).json({ message: 'Already submitted'});
+    res.status(200).json({ ok: false, message: 'Already submitted'});
   } else {
-    res.status(404).json({ message: 'Not found'});
+    res.status(200).json({ ok: true, message: 'Not found',});
   }
     // res.status(200).json({ submissions, ip });
   } catch (err) {
     if (err.code === 'ENOENT') {
-      return res.status(404).json({ message: 'Not found'});
+      return res.status(404).json({ message: 'Not foundddd'});
     }
     res.status(500).json({ error: 'Error reading submissions file' });
   }
