@@ -54,7 +54,7 @@ const Quiz = ({ questions }) => {
   if (!quizStarted) {
     return (
       <div
-        style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}
+        style={{ display: "flex", flexDirection: "column", minHeight: "95vh" }}
       >
         <header className="bg-success text-white p-3 text-center opacity-50">
           <h1 style={{ fontWeight: "bold" }}>So'rovnoma</h1>
@@ -79,7 +79,7 @@ const Quiz = ({ questions }) => {
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}
+      style={{ display: "flex", flexDirection: "column", minHeight: "95vh" }}
     >
       <header className="bg-success text-white p-3 text-center opacity-50">
         <h1 style={{ fontWeight: "bold" }}>So'rovnoma</h1>
