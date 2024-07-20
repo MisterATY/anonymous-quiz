@@ -46,7 +46,7 @@ const Results = ({ submissions }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/results');
+  const res = await fetch('/api/results');
   const data = await res.json();
 
   return {
