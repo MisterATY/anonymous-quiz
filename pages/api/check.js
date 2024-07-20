@@ -12,7 +12,14 @@ export default async function handler(req, res) {
     const data = await fs.readFile(submissionsFile, 'utf8');
     const submissions = JSON.parse(data);
     const ip = getClientIp(req);
-    res.status(200).json({ submissions, ip });
+    const alreadySubmitted = submissions.some(submission => submission.ip === ip);
+
+  if (alreadySubmitted) {
+    res.status(200).json({ message: 'Already submitted', fufu: submissions });
+  } else {
+    res.status(404).json({ message: 'Not found', fufu: submissions });
+  }
+    // res.status(200).json({ submissions, ip });
   } catch (err) {
     if (err.code === 'ENOENT') {
       return res.status(200).json({ submissions: [] });
