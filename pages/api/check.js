@@ -8,8 +8,11 @@ const getClientIp = (req) => {
 
 export default function handler(req, res) {
   const ip = getClientIp(req);
-  const filePath = path.join(process.cwd(), 'data', 'submissions.json');
-  const submissions = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  // const filePath = path.join(process.cwd(), 'data', 'submissions.json');
+  const submissionsFile = path.join('/tmp', 'submissions.json');
+  // const submissions = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const data = fs.readFile(submissionsFile, 'utf8');
+  const submissions = JSON.parse(data);
 
   const alreadySubmitted = submissions.some(submission => submission.ip === ip);
 
