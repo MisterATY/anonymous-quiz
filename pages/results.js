@@ -81,4 +81,14 @@ const Results = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  const { admin } = context.query;
+
+  if (admin !== '1') {
+    return {
+      notFound: true,
+    };
+  }
+}
+
 export default Results;

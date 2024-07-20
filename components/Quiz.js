@@ -100,7 +100,7 @@ const Quiz = ({ questions }) => {
           </div>
         </div>
       </div>
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showModal} onHide={() => setShowModal(false)} onExited={() => alert('whoami')}>
         <Modal.Header closeButton>
           <Modal.Title>Status</Modal.Title>
         </Modal.Header>
