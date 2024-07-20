@@ -62,55 +62,63 @@ const Quiz = ({ questions }) => {
   }
 
   return (
-    <div className="container mt-5">
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">
-            Question {currentQuestionIndex + 1}/{questions.length}
-          </h5>
-          <p className="card-text">{questions[currentQuestionIndex].question}</p>
-          <div className="form-group">
-            {questions[currentQuestionIndex].options.map((option, index) => (
-              <div className="form-check" key={index}>
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name={`question-${currentQuestionIndex}`}
-                  value={option}
-                  checked={answers[currentQuestionIndex] === option}
-                  onChange={handleAnswerChange}
-                />
-                <label className="form-check-label">{option}</label>
-              </div>
-            ))}
-          </div>
-          <div className="d-flex justify-content-between mt-4">
-            <Button variant="secondary" onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
-              Avvalgi
-            </Button>
-            {currentQuestionIndex < questions.length - 1 ? (
-              <Button variant="primary" onClick={handleNext} disabled={!answers[currentQuestionIndex]}>
-                Keyingi
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      <header className="bg-success text-white p-3 text-center opacity-50">
+        <h1 style={{ fontWeight: 'bold' }}>So'rovnoma</h1>
+      </header>
+      <div className="container mt-5" style={{ flex: 1, overflow: 'auto' }}>
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">
+              Question {currentQuestionIndex + 1}/{questions.length}
+            </h5>
+            <p className="card-text">{questions[currentQuestionIndex].question}</p>
+            <div className="form-group">
+              {questions[currentQuestionIndex].options.map((option, index) => (
+                <div className="form-check" key={index}>
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name={`question-${currentQuestionIndex}`}
+                    value={option}
+                    checked={answers[currentQuestionIndex] === option}
+                    onChange={handleAnswerChange}
+                  />
+                  <label className="form-check-label">{option}</label>
+                </div>
+              ))}
+            </div>
+            <div className="d-flex justify-content-between mt-4">
+              <Button variant="secondary" onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
+                Avvalgi
               </Button>
-            ) : (
-              <Button variant="success" onClick={handleSubmit} disabled={!answers[currentQuestionIndex]}>
-                Tugatish
-              </Button>
-            )}
+              {currentQuestionIndex < questions.length - 1 ? (
+                <Button variant="primary" onClick={handleNext} disabled={!answers[currentQuestionIndex]}>
+                  Keyingi
+                </Button>
+              ) : (
+                <Button variant="success" onClick={handleSubmit} disabled={!answers[currentQuestionIndex]}>
+                  Tugatish
+                </Button>
+              )}
+            </div>
           </div>
         </div>
+        <Modal show={showModal} onHide={() => setShowModal(false)} onExited={() => window.location.reload()}>
+          <Modal.Header closeButton>
+            <Modal.Title>Status</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Muvaffaqiyatli ishtirok etdingiz</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => setShowModal(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
-      <Modal show={showModal} onHide={() => setShowModal(false)} onExited={() => window.location.reload()}>
-        <Modal.Header closeButton>
-          <Modal.Title>Status</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Muvaffaqiyatli ishtirok etdingiz</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <footer className="bg-dark text-white text-center p-3 mt-5">
+        <p>&copy; Powered by <span style={{ fontWeight: 'bold', color: 'silver' }}>IIC Club.</span></p>
+      </footer>
     </div>
   );
 };
