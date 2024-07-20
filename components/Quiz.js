@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Modal, Button } from "react-bootstrap";
 
 const Quiz = ({ questions }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [quizStarted, setQuizStarted] = useState(false);
 
   useEffect(() => {
     const checkIfAlreadyAnswered = async () => {
       try {
-        const response = await axios.get('/api/check');
+        const response = await axios.get("/api/check");
         if (response.status === 200) {
-          setMessage('Siz avval ishtirok etgansiz');
+          setMessage("Siz avval ishtirok etgansiz");
           setQuizStarted(false);
         } else {
           setQuizStarted(true);
@@ -43,36 +43,56 @@ const Quiz = ({ questions }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('/api/submit', { answers });
+      await axios.post("/api/submit", { answers });
       setShowModal(true);
     } catch (error) {
-      console.error('Error submitting quiz:', error);
-      setMessage('Error submitting the quiz.');
+      console.error("Error submitting quiz:", error);
+      setMessage("Error submitting the quiz.");
     }
   };
 
   if (!quizStarted) {
     return (
-      <div className="container mt-5">
-        <div className="alert alert-info" role="alert">
-          {message}
+      <div
+        style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}
+      >
+        <header className="bg-success text-white p-3 text-center opacity-50">
+          <h1 style={{ fontWeight: "bold" }}>So'rovnoma</h1>
+        </header>
+        <div className="container mt-5" style={{ flex: 1, overflow: "auto" }}>
+          <div className="alert alert-info" role="alert">
+            {message}
+          </div>
         </div>
+
+        <footer className="bg-dark text-white text-center p-3 mt-5">
+          <p>
+            &copy; Powered by{" "}
+            <span style={{ fontWeight: "bold", color: "silver" }}>
+              IIC Club.
+            </span>
+          </p>
+        </footer>
       </div>
     );
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <div
+      style={{ display: "flex", flexDirection: "column", minHeight: "90vh" }}
+    >
       <header className="bg-success text-white p-3 text-center opacity-50">
-        <h1 style={{ fontWeight: 'bold' }}>So'rovnoma</h1>
+        <h1 style={{ fontWeight: "bold" }}>So'rovnoma</h1>
       </header>
-      <div className="container mt-5" style={{ flex: 1, overflow: 'auto' }}>
+      <div className="container mt-5" style={{ flex: 1, overflow: "auto" }}>
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">
               Question {currentQuestionIndex + 1}/{questions.length}
             </h5>
-            <p className="card-text">{questions[currentQuestionIndex].question}</p>
+            <p className="card-text">
+              {questions[currentQuestionIndex].question}
+            </p>
             <div className="form-group">
               {questions[currentQuestionIndex].options.map((option, index) => (
                 <div className="form-check" key={index}>
@@ -89,22 +109,38 @@ const Quiz = ({ questions }) => {
               ))}
             </div>
             <div className="d-flex justify-content-between mt-4">
-              <Button variant="secondary" onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
+              <Button
+                variant="secondary"
+                onClick={handlePrevious}
+                disabled={currentQuestionIndex === 0}
+              >
                 Avvalgi
               </Button>
               {currentQuestionIndex < questions.length - 1 ? (
-                <Button variant="primary" onClick={handleNext} disabled={!answers[currentQuestionIndex]}>
+                <Button
+                  variant="primary"
+                  onClick={handleNext}
+                  disabled={!answers[currentQuestionIndex]}
+                >
                   Keyingi
                 </Button>
               ) : (
-                <Button variant="success" onClick={handleSubmit} disabled={!answers[currentQuestionIndex]}>
+                <Button
+                  variant="success"
+                  onClick={handleSubmit}
+                  disabled={!answers[currentQuestionIndex]}
+                >
                   Tugatish
                 </Button>
               )}
             </div>
           </div>
         </div>
-        <Modal show={showModal} onHide={() => setShowModal(false)} onExited={() => window.location.reload()}>
+        <Modal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          onExited={() => window.location.reload()}
+        >
           <Modal.Header closeButton>
             <Modal.Title>Status</Modal.Title>
           </Modal.Header>
@@ -117,7 +153,10 @@ const Quiz = ({ questions }) => {
         </Modal>
       </div>
       <footer className="bg-dark text-white text-center p-3 mt-5">
-        <p>&copy; Powered by <span style={{ fontWeight: 'bold', color: 'silver' }}>IIC Club.</span></p>
+        <p>
+          &copy; Powered by{" "}
+          <span style={{ fontWeight: "bold", color: "silver" }}>IIC Club.</span>
+        </p>
       </footer>
     </div>
   );
