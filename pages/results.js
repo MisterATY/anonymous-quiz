@@ -11,15 +11,15 @@ const Results = () => {
   const { admin } = router.query;
 
   // Redirect to 404 if admin query param is not 1
-  useEffect(() => {
-    if (admin !== '1') {
-      router.replace('/404');
-    }
-  }, [admin]);
+  // useEffect(() => {
+  //   if (admin !== '1') {
+  //     router.replace('/404');
+  //   }
+  // }, [admin]);
 
-  if (admin !== '1') {
-    return null;
-  }
+  // if (admin !== '1') {
+  //   return null;
+  // }
 
   useEffect(() => {
     const fetchResults = async () => {

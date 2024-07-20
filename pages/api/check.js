@@ -1,5 +1,5 @@
 // pages/api/check.js
-import fs from 'fs';
+import { promises as fs } from 'fs';
 import path from 'path';
 
 const getClientIp = (req) => {
