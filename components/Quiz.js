@@ -87,24 +87,24 @@ const Quiz = ({ questions }) => {
       <div className="container mt-5" style={{ flex: 1, overflow: "auto" }}>
         <div className="card">
           <div className="card-body">
-            <h5 className="card-title">
-              Question {currentQuestionIndex + 1}/{questions.length}
-            </h5>
-            <p className="card-text">
-              {questions[currentQuestionIndex].question}
-            </p>
+              <p className="card-text">
+               {currentQuestionIndex + 1}/{questions.length}.&nbsp; <span className="card-title" style={{ fontWeight: 'bold' }}>{questions[currentQuestionIndex].question}</span>
+              </p>
+            <hr />
             <div className="form-group">
               {questions[currentQuestionIndex].options.map((option, index) => (
                 <div className="form-check" key={index}>
-                  <input
-                    className="form-check-input"
-                    type="radio"
-                    name={`question-${currentQuestionIndex}`}
-                    value={option}
-                    checked={answers[currentQuestionIndex] === option}
-                    onChange={handleAnswerChange}
-                  />
-                  <label className="form-check-label">{option}</label>
+                  <label className="form-check-label">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name={`question-${currentQuestionIndex}`}
+                      value={option}
+                      checked={answers[currentQuestionIndex] === option}
+                      onChange={handleAnswerChange}
+                    />
+                    {option}
+                  </label>
                 </div>
               ))}
             </div>
