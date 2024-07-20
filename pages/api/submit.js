@@ -7,7 +7,7 @@ const getClientIp = (req) => {
 };
 
 export default async function handler(req, res) {
-  if (req.method === 'POST') {
+//   if (req.method === 'POST') {
     const ip = getClientIp(req);
     const filePath = path.join(process.cwd(), 'data', 'submissions.json');
     const submissions = JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     const alreadySubmitted = submissions.some(submission => submission.ip === ip);
 
     if (alreadySubmitted) {
-      return res.status(400).json({ message: 'You have already answered the quiz.' });
+      return res.status(400).json({ message: 'Siz avval ishtirok etgansiz.' });
     }
 
     // Save new submission
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     fs.writeFileSync(filePath, JSON.stringify(submissions, null, 2));
 
     res.status(200).json({ message: 'Success' });
-  } else {
-    res.status(405).end(); // Method Not Allowed
-  }
+//   } else {
+//     res.status(405).end(); // Method Not Allowed
+//   }
 }

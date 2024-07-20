@@ -14,7 +14,7 @@ const Quiz = ({ questions }) => {
       try {
         const response = await axios.get('/api/check');
         if (response.status === 200) {
-          setMessage('You have already answered the quiz.');
+          setMessage('Siz avval ishtirok etgansiz');
           setQuizStarted(false);
         } else {
           setQuizStarted(true);
@@ -86,15 +86,15 @@ const Quiz = ({ questions }) => {
           </div>
           <div className="d-flex justify-content-between mt-4">
             <Button variant="secondary" onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
-              Previous
+              Avvalgi
             </Button>
             {currentQuestionIndex < questions.length - 1 ? (
               <Button variant="primary" onClick={handleNext} disabled={!answers[currentQuestionIndex]}>
-                Next
+                Keyingi
               </Button>
             ) : (
               <Button variant="success" onClick={handleSubmit} disabled={!answers[currentQuestionIndex]}>
-                Finish
+                Tugatish
               </Button>
             )}
           </div>
@@ -102,9 +102,9 @@ const Quiz = ({ questions }) => {
       </div>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Submission Status</Modal.Title>
+          <Modal.Title>Status</Modal.Title>
         </Modal.Header>
-        <Modal.Body>You have successfully submitted the quiz!</Modal.Body>
+        <Modal.Body>Muvaffaqiyatli ishtirok etdingiz</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Close
