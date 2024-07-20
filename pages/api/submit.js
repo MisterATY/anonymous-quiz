@@ -5,7 +5,7 @@ const getClientIp = (req) => {
   return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 };
 
-const submissionsFile = path.join('/tmp', 'submissions.json');
+const submissionsFile = path.join('/data', 'submissions.json');
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

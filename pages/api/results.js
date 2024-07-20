@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
-const submissionsFile = path.join('/tmp', 'submissions.json');
+const submissionsFile = path.join('/data', 'submissions.json');
 
 export default async function handler(req, res) {
   try {
