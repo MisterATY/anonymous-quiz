@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import questions from '../data/questions';  // Import the questions
-import { useRouter } from 'next/router';
 
 const Results = () => {
   const [results, setResults] = useState({});
   const [loading, setLoading] = useState(true);
-
-  const router = useRouter();
-  const { admin } = router.query;
 
   // Redirect to 404 if admin query param is not 1
   // useEffect(() => {
