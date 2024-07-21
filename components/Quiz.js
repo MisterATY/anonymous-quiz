@@ -43,10 +43,10 @@ const Quiz = ({ questions }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post("/api/submit", { answers });
-      setShowModal(true);
+      await axios.post("/api/submit", { answers }).then(e => {
+        setShowModal(true);
+      });
     } catch (error) {
-      console.error("Error submitting quiz:", error);
       setMessage("Error submitting the quiz.");
     }
   };
