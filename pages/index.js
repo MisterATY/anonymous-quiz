@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Anonymous Quiz</title>
-        <meta name="description" content="Anonymous Quiz Application" />
+        <title>Asosiy turdagi oziq-ovqat mahsulotlari iste’moli bo‘yicha so‘rovnoma.</title>
+        <meta name="description" content="Asosiy turdagi oziq-ovqat mahsulotlari iste’moli bo‘yicha so‘rovnoma." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Quiz questions={questions} />
