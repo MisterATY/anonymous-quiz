@@ -44,7 +44,8 @@ const Quiz = ({ questions }) => {
   const handleSubmit = async () => {
     try {
       await axios.post("/api/submit", { answers }).then(e => {
-        setShowModal(true);
+        setQuizStarted(false);
+        setMessage("Muvaffaqiyatli ishtirok etdingiz!");
       });
     } catch (error) {
       setMessage("Error submitting the quiz.");
@@ -174,7 +175,7 @@ const Quiz = ({ questions }) => {
           <Modal.Body>Muvaffaqiyatli ishtirok etdingiz</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={() => setShowModal(false)}>
-              Close
+              Yopish
             </Button>
           </Modal.Footer>
         </Modal>
