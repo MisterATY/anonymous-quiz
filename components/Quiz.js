@@ -56,8 +56,11 @@ const Quiz = ({ questions }) => {
       <div
         style={{ display: "flex", flexDirection: "column", minHeight: "95vh" }}
       >
-        <header className="bg-success text-white p-3 text-center opacity-50">
-          <h1 style={{ fontWeight: "bold" }}>So'rovnoma</h1>
+        <header className="bg-success text-white p-3 py-1 text-center opacity-50">
+          <h4 style={{ fontWeight: "bold" }}>
+            Asosiy turdagi oziq-ovqat mahsulotlari iste’moli bo‘yicha
+            so‘rovnoma.
+          </h4>
         </header>
         <div className="container mt-5" style={{ flex: 1, overflow: "auto" }}>
           <div className="alert alert-info" role="alert">
@@ -81,19 +84,29 @@ const Quiz = ({ questions }) => {
     <div
       style={{ display: "flex", flexDirection: "column", minHeight: "95vh" }}
     >
-      <header className="bg-success text-white p-3 text-center opacity-50">
-        <h1 style={{ fontWeight: "bold" }}>So'rovnoma</h1>
+      <header className="bg-success text-white p-3 py-1 text-center opacity-50">
+        <h4 style={{ fontWeight: "bold" }}>
+          Asosiy turdagi oziq-ovqat mahsulotlari iste’moli bo‘yicha so‘rovnoma.
+        </h4>
       </header>
-      <div className="container mt-5" style={{ flex: 1, overflow: "auto" }}>
+      <p style={{ fontStyle: "italic", fontSize: '.8em', padding: '.5em', textIndent: '1em' }}>
+        Izox. So‘rovnoma natijalari asosida axolining asosiy oziq-ovqat
+        mahsulotlariga bo‘lgan talab shakllantiriladi. Shu sababli imkon qadar
+        aniq javob belgilashingizni iltimos qilamiz.
+      </p>
+      <div className="container" style={{ flex: 1, overflow: "auto" }}>
         <div className="card">
           <div className="card-body">
-              <p className="card-text">
-               {currentQuestionIndex + 1}/{questions.length}.&nbsp; <span className="card-title" style={{ fontWeight: 'bold' }}>{questions[currentQuestionIndex].question}</span>
-              </p>
+            <p className="card-text">
+              {currentQuestionIndex + 1}/{questions.length}.&nbsp;{" "}
+              <span className="card-title" style={{ fontWeight: "bold" }}>
+                {questions[currentQuestionIndex].question}
+              </span>
+            </p>
             <hr />
             <div className="form-group">
               {questions[currentQuestionIndex].options.map((option, index) => (
-                <div className="form-check" key={index}>
+                <div className="form-check" key={index} style={{ marginBottom: '.5em' }}>
                   <label className="form-check-label">
                     <input
                       className="form-check-input"
