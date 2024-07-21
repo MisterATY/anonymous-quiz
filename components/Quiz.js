@@ -152,7 +152,7 @@ const Quiz = ({ questions }) => {
         <Modal
           show={showModal}
           onHide={() => setShowModal(false)}
-          onExited={() => window.location.reload()}
+          onExited={() => setQuizStarted(false)}
         >
           <Modal.Header closeButton>
             <Modal.Title>Status</Modal.Title>
