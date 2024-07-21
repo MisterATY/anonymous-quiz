@@ -12,13 +12,14 @@ const Quiz = ({ questions }) => {
   useEffect(() => {
     const checkIfAlreadyAnswered = async () => {
       try {
-        const response = await axios.get("/api/check");
-        if (response.data.ok) {
-          setQuizStarted(true);
-        } else {
-          setMessage("Siz avval ishtirok etgansiz");
-          setQuizStarted(false);
-        }
+        const response = axios.get("/api/check").then(response => {
+          if (response.data.ok === true) {
+            setQuizStarted(true);
+          } else {
+            setMessage("Siz avval ishtirok etgansiz");
+            setQuizStarted(false);
+          }
+        })
       } catch (error) {
         setQuizStarted(true);
       }
