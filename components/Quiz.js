@@ -89,7 +89,14 @@ const Quiz = ({ questions }) => {
           Asosiy turdagi oziq-ovqat mahsulotlari iste’moli bo‘yicha so‘rovnoma.
         </h4>
       </header>
-      <p style={{ fontStyle: "italic", fontSize: '.8em', padding: '.5em', textIndent: '1em' }}>
+      <p
+        style={{
+          fontStyle: "italic",
+          fontSize: ".8em",
+          padding: ".5em",
+          textIndent: "1em",
+        }}
+      >
         Izox. So‘rovnoma natijalari asosida axolining asosiy oziq-ovqat
         mahsulotlariga bo‘lgan talab shakllantiriladi. Shu sababli imkon qadar
         aniq javob belgilashingizni iltimos qilamiz.
@@ -106,7 +113,11 @@ const Quiz = ({ questions }) => {
             <hr />
             <div className="form-group">
               {questions[currentQuestionIndex].options.map((option, index) => (
-                <div className="form-check" key={index} style={{ marginBottom: '.5em' }}>
+                <div
+                  className="form-check"
+                  key={index}
+                  style={{ marginBottom: ".5em" }}
+                >
                   <label className="form-check-label">
                     <input
                       className="form-check-input"
@@ -152,7 +163,10 @@ const Quiz = ({ questions }) => {
         <Modal
           show={showModal}
           onHide={() => setShowModal(false)}
-          onExited={() => setQuizStarted(false)}
+          onExited={() => {
+            setQuizStarted(false);
+            setMessage("Muvaffaqiyatli ishtirok etdingiz!");
+          }}
         >
           <Modal.Header closeButton>
             <Modal.Title>Status</Modal.Title>
